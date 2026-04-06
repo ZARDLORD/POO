@@ -1,0 +1,41 @@
+import java.util.Scanner;
+public class Main
+{
+public static void main(String[]args)
+{
+//6) Crear un programa que pida al usuario un número entero
+de 5 dígitos, y que
+//muestre por consola el resultado de la suma de todos sus
+dígitos. En el caso de que se
+//ingrese un número de más dígitos o de menos dígitos
+informar el error y volver a pedir el
+//número.
+int x =1;
+Scanner read = new Scanner(System.in);
+System.out.println("Ingrese un numero entero de 5
+digitos");
+x = read.nextInt();
+do {
+if (x<10000 || x>99999){System.out.println("El numero
+no tiene 5 digitos, envie otro");
+x=read.nextInt();}
+else
+{
+String numero = String.valueOf(x);
+System.out.println(numero.length());
+System.out.println("La suma invidual de cada
+digitos de "+x+" es de "+
+(Character.getNumericValue(numero.charAt(0))
++
+Character.getNumericValue(numero.charAt(1))
++
+Character.getNumericValue(numero.charAt(2))
++
+Character.getNumericValue(numero.charAt(3))
++
+Character.getNumericValue(numero.charAt(4))));
+break;
+}
+}while (true);
+}
+}
