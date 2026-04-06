@@ -1,0 +1,56 @@
+import java.util.Scanner;
+public class Main
+{
+public static void main(String[]args)
+{
+//7) Crear un programa que pida al usuario ingresar un
+valor en pesos, e informe la
+//cantidad mínima de billetes y monedas necesarias para la
+cantidad ingresada.
+int //billetes
+zok=20000,
+iok=10000,zk=2000,ik=1000,soo=500,dosc=200,cien=100,cincuenta=50,v
+einte=20,diez=10;
+int //monedas
+cinco=5,dos=2,uno=1;
+Scanner read = new Scanner(System.in);
+System.out.println("Ingrese la cantidad en pesos ARS");
+int pesos = read.nextInt();//ejemplo 33889
+int suma =0;
+int billetes=0;
+int monedas =0;
+while (pesos!=suma)
+{
+do {
+if (suma + zok <= pesos) {billetes += 1;suma +=
+zok;break;}
+if (suma + iok <= pesos) {billetes += 1;suma +=
+iok;break;}
+if (suma + zk <= pesos) {billetes += 1;suma +=
+zk;break;}
+if (suma + ik <= pesos) {billetes += 1;suma +=
+ik;break;}
+if (suma + soo <= pesos) {billetes += 1;suma +=
+soo;break;}
+if (suma + dosc <= pesos) {billetes += 1;suma +=
+dosc;break;}
+if (suma + cien <= pesos) {billetes += 1;suma +=
+cien;break;}
+if (suma + cincuenta <= pesos) {billetes += 1;suma
++= cincuenta;break;}
+if (suma + veinte <= pesos) {billetes += 1;suma +=
+veinte;break;}
+if (suma + diez <= pesos) {billetes += 1;suma +=
+diez;break;}
+if (suma + cinco <= pesos) {monedas += 1;suma +=
+cinco;break;}
+if (suma + dos <= pesos) {monedas += 1;suma +=
+dos;break;}
+if (suma + uno <= pesos) {monedas += 1;suma +=
+uno;break;}
+}while (true);
+}
+System.out.println("Se necesitan "+billetes+" billetes y
+"+monedas+" monedas para llegar a "+suma+ " pesos");
+}
+}
