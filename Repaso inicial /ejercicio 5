@@ -1,0 +1,14 @@
+import java.util.Scanner;
+public class Main
+{
+public static void main(String[]args)
+{
+//5) Crear un programa que informe su peso efectivo en la
+luna, sabiendo que este será
+//un 17% respecto a su peso en la tierra.
+Scanner read = new Scanner(System.in);
+System.out.println("Ingrese su peso (en kg)");
+float peso = read.nextFloat();
+System.out.println("Su peso lunar es de "+peso*0.17+" kg");
+}
+}
