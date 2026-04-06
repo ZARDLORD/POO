@@ -1,1 +1,39 @@
-asd
+import java.util.Scanner;
+public class Main
+{
+public static void main(String[] args)
+{
+int entero1=-1;
+int entero2=-1;
+int entero3=-1;
+int x;
+for (int i=0;i<3;i++)
+{
+Scanner read = new Scanner(System.in);
+System.out.println("Ingrese el numero entero
+N°"+(i+1));
+x= read.nextInt();
+if(entero1==-1){entero1=x;continue;}
+if(entero2==-1){entero2=x;continue;}
+if(entero3==-1){entero3=x;continue;}
+}
+int suma = entero1+entero2+entero3;
+float promedio = suma/3;
+int producto = entero1*entero2*entero3;
+//mayor
+int mayor =entero1;
+if (entero2>entero1 && entero2>entero3){mayor=entero2;}
+if (entero3>entero1 && entero3>entero2){mayor=entero3;}
+//menor
+int menor =entero1;
+if (entero2<entero1 && entero2<entero3){menor=entero2;}
+if (entero3<entero1 && entero3<entero2){menor=entero3;}
+System.out.println("Numeros:
+"+entero1+","+entero2+","+entero3);
+System.out.println("Suma: "+suma);
+System.out.println("Promedio: "+promedio);
+System.out.println("producto: "+producto);
+System.out.println("mayor: "+mayor);
+System.out.println("menor: "+menor);
+}
+}
