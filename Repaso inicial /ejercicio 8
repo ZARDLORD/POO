@@ -1,0 +1,40 @@
+import java.util.Scanner;
+public class Main
+{
+public static void main(String[]args)
+{
+float masac=0;
+int opcion=0;
+Scanner read = new Scanner(System.in);
+do {
+System.out.println("----MENU----");
+System.out.println("1) peso y altura en libras y
+pulgadas");
+System.out.println("2) peso y altura en kilos y
+metros");
+System.out.println("3) Salir");
+opcion = read.nextInt();
+if (opcion==3){continue;}
+System.out.println("Ingrese el peso");
+float peso = read.nextFloat();
+System.out.println("Ingrese la altura");
+float altura = read.nextFloat();
+if (opcion==1)
+{
+masac= (peso*703)/(altura*altura);
+System.out.println("La masa corporal es de
+"+masac);
+} else if (opcion==2) {
+masac=peso/(altura*altura);
+System.out.println("La masa corporal es de
+"+masac);
+}
+if (masac<18.5){System.out.println("Peso bajo");}
+else if (masac >18.5 && masac < 24.9)
+{System.out.println("Peso normal");}
+else if (masac >24.9 && masac < 29.9)
+{System.out.println("Sobrepeso");}
+else if (masac>29.9){System.out.println("obesidad");}
+}while (opcion!=3);
+}
+}
