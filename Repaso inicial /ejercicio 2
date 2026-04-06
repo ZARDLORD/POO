@@ -1,0 +1,14 @@
+import java.util.Scanner;
+public class Main
+{
+public static void main(String[]args)
+{
+//2) Crear un programa que informe si un número ingresado
+es par o impar.
+Scanner read = new Scanner(System.in);
+System.out.println("Ingrese el numero para evaluarlo");
+float x = read.nextInt();
+if(x%2==0){System.out.println("El numero es par");}
+else {System.out.println("El numero es impar");}
+}
+}
