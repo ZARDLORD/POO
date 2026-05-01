@@ -1,0 +1,62 @@
+import java.io.DataOutput;
+import java.util.Random;
+import java.util.Scanner;
+
+
+
+
+public class Main
+{
+ static Scanner read = new Scanner(System.in);
+ static Monedas moneda;
+ static String eleccion;
+ static boolean verificacion = true;
+ static boolean juego = true;
+
+
+
+
+ public static void main(String[]args)
+ {
+   //realizar un juego de una moneda y adivniar de que lado cae
+   do {
+     moneda = TirarMoneda();
+     IngresarDatos();
+     LogicadeJuego();
+   }while (!juego);
+ }
+
+
+ public static void LogicadeJuego()
+ {
+   if(moneda.toString().equals(eleccion))
+   {
+     System.out.println("Quee, adivinaste, re pro bro bien bro pro, tipo, tipo tan pro como Omega1160 patheando a bot para matarse solo en un dive, deam");
+   }
+   else{System.out.println("Mal ahi loco, tenias un 50% y no le pegaste JASDJS, burrooo");}
+   do
+   {
+     System.out.println("Quiere volver a jugar? (S/N)");
+     eleccion = read.next().toUpperCase();
+     if(eleccion.equals("S")||eleccion.equals("N")){verificacion=true;}
+     else{verificacion=false;System.out.println("Datos no validos, volver a ingresar.\n");}
+   }while (!verificacion);
+   if (eleccion.equals("S")){juego=false;}
+   else if (eleccion.equals("N")) {juego=true;System.out.println("dale, gracias por probar el juego profe");}
+ }
+ public static void IngresarDatos()
+ {
+   do{
+     System.out.println("La moneda sera CARA o CRUZ?");
+     eleccion = read.next().toUpperCase();
+     if(eleccion.equals("CARA")||eleccion.equals("CRUZ")){verificacion=true;}
+     else{verificacion=false;System.out.println("Datos no validos, volver a ingresar.\n");}
+   }while(!verificacion);
+ }
+ public static Monedas TirarMoneda()
+ {
+   Random random = new Random();
+   int lado = random.nextInt(2);
+   if (lado==0){return Monedas.CARA;}
+   else{return Monedas.CRUZ;}
+ }
