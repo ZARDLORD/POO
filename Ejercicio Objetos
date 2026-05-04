@@ -96,6 +96,33 @@ public class Main
             case "4":
                 if(compu.getEncendido()){compu.Datos();Enter();}else {System.out.println("La compu esta apagada");Enter();}
                 break;
+            case "5":
+                System.out.println("Seleccione que componente quiere cambiar"+
+                        "\n1)Placa Madre: "+compu.getPlacaMadre()+
+                        "\n2)Procesador: "+compu.getProcesador()+
+                        "\n3)Memoria RAM: "+compu.getRam()+
+                        "\n4)Placa de video: "+compu.getPlacaVideo());
+                String opcion = read.nextLine();
+                switch(opcion)
+                {
+                    case "1":
+                        System.out.println("Ingrese la nueva placa madre:");
+                        compu.setPlacaMadre(Verificacion(compu.getPlacaMadre()));
+                        break;
+                    case "2":
+                        System.out.println("Ingrese el nuevo procesador:");
+                        compu.setProcesador(Verificacion(compu.getProcesador()));
+                        break;
+                    case "3":
+                        System.out.println("Ingrese la nueva memoria RAM:");
+                        compu.setRam(Verificacion(compu.getRam()));
+                        break;
+                    case "4":
+                        System.out.println("Ingrese la nueva placa de video:");
+                        compu.setPlacaVideo(Verificacion(compu.getPlacaVideo()));
+                        break;
+                }
+                break;
 
             default:System.out.println("Opcion no valida");Enter();break;
         }
@@ -114,15 +141,17 @@ public class Main
     public static void Menu(){
         Espacio();
         System.out.println("/--------MENU--------\\"
-        +"\n1)Encender computadora"
-        +"\n2)Apagar computadora"
-        +"\n3)Reiniciar computadora"
-        +"\n4)Ver Especificaciones");
+                +"\n0)Salir"
+                +"\n1)Encender computadora"
+                +"\n2)Apagar computadora"
+                +"\n3)Reiniciar computadora"
+                +"\n4)Ver Especificaciones"
+                +"\n5)Modificar componentes");
         opcion = read.nextLine();
     }
     public static void Enter(){System.out.println("Pesiona cualquier tecla para seguir...");read.nextLine();}
     public static void IngresarDatos(){ //Larguisimo pero quedo bueno creo¿?
-       String madre="",procesador="",ram="",video="";
+        String madre="",procesador="",ram="",video="";
         System.out.println("Ingrese los componentes de la PC: " +
                 "\nPlaca Madre: (Ingresando...)\nProcesador: \nMemoria RAM: \nPlaca de video:");
         madre=Verificacion(madre);
