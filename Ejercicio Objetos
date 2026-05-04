@@ -1,0 +1,154 @@
+//Se desea crear un programa que simule la creación de una pc,
+// el mismo debe poseer un placa madre, procesador, RAM y puede tener o no placa de video.
+// Una vez creada la pc se puede modificar los componentes,
+// agregar o quitar RAM y realizar diferentes funciones como: encender, apagar, reiniciar y ver especificaciones.
+// Para apagar, ver las especificaciones y reiniciar tiene que estar prendido
+public class Computadora {
+    private String PlacaMadre,Procesador,Ram,PlacaVideo;//No se si querias ram como numero o string
+    private Boolean Encendido = false;
+    public Computadora(String PlacaMadre, String procesador, String Ram,String PlacaVideo)
+    {
+        this.PlacaMadre=PlacaMadre;
+        this.Procesador=procesador;
+        this.Ram=Ram;
+        this.PlacaVideo=PlacaVideo;
+    }
+
+    public String getPlacaMadre(){return PlacaMadre;}
+    public void setPlacaMadre(String PlacaMadre){this.PlacaMadre=PlacaMadre;}
+
+    public String getProcesador(){return Procesador;}
+    public void setProcesador(String Procesador){this.Procesador=Procesador;}
+
+    public String getRam(){return Ram;}
+    public void setRam(String Ram){this.Ram=Ram;}
+
+    public String getPlacaVideo(){return PlacaVideo;}
+    public void setPlacaVideo(String PlacaVideo){this.PlacaVideo=PlacaVideo;}
+
+    public Boolean getEncendido(){return Encendido;}
+    public void setEncendido(Boolean Encendido){this.Encendido=Encendido;}
+
+    public void Encender(){
+        if(!Encendido){System.out.println("La PC se ecendio");Encendido=true;}
+        else {System.out.println("La PC ya está encendida");}
+    }
+    public void Apagar(){
+        if(Encendido){System.out.println("La PC se apago");Encendido=false;}
+        else {System.out.println("La PC ya está apagada");}
+    }
+    public void Datos(){
+        System.out.println("La PC tiene los siguientes componentes:" +
+                "\nPlaca madre: "+PlacaMadre+
+                "\nProcesador: "+Procesador+
+                "\nMemoria Ram: "+Ram+
+                "\nPlaca video: "+PlacaVideo);
+    }
+}
+//Se desea crear un programa que simule la creación de una pc,
+// el mismo debe poseer un placa madre, procesador, RAM y puede tener o no placa de video.
+// Una vez creada la pc se puede modificar los componentes,
+// agregar o quitar RAM y realizar diferentes funciones como: encender, apagar, reiniciar y ver especificaciones.
+// Para apagar, ver las especificaciones y reiniciar tiene que estar prendido
+import java.util.Scanner;
+
+public class Main
+{
+    static Scanner read = new Scanner(System.in);
+    static Computadora compu;
+    static String opcion;
+    public static void main(String[]args)
+    {
+        IngresarDatos();
+        do {
+            Menu();
+            Logica();
+        }while (!opcion.equals("0"));
+    }
+    public static void Logica()
+    {
+        switch (opcion)
+        {
+            case "0":
+                System.out.println("Cerrando programa...");
+                break;
+            case "1":
+                if(!compu.getEncendido()){compu.Encender();Enter();}else {System.out.println("La compu ya esta ON");Enter();}
+                break;
+
+            case "2":
+                if (compu.getEncendido()){compu.Apagar();Enter();}else {System.out.println("La compu ya esta apagada");Enter();}
+                break;
+
+            case "3":
+                if(compu.getEncendido()){System.out.println("Reiniciando computadora....");
+                    try {
+                        for(int i =0;i<5;i++)
+                        {System.out.print(".");Thread.sleep(500);}
+                        System.out.print("!");}
+                    catch (Exception e){System.out.println("No toques nada mientras se reinicia la compu");Enter();}
+
+                    System.out.println("Ya esta");Enter();}
+
+                else {System.out.println("La compu esta apagada");Enter();}
+                break;
+
+            case "4":
+                if(compu.getEncendido()){compu.Datos();Enter();}else {System.out.println("La compu esta apagada");Enter();}
+                break;
+
+            default:System.out.println("Opcion no valida");Enter();break;
+        }
+    }
+    public static String Verificacion(String x){
+        Boolean verificacion = false;
+        do {
+            x=read.nextLine();
+            if(x.length()==0){System.out.println("La PC no puede andar sin este componente,ingrese de nuevo el componente");
+            }
+            else {verificacion=true;}
+        }while (!verificacion);
+        return x;
+    }
+    public static void Espacio(){for(int i=0;i<20;i++){System.out.println("");}}
+    public static void Menu(){
+        Espacio();
+        System.out.println("/--------MENU--------\\"
+        +"\n1)Encender computadora"
+        +"\n2)Apagar computadora"
+        +"\n3)Reiniciar computadora"
+        +"\n4)Ver Especificaciones");
+        opcion = read.nextLine();
+    }
+    public static void Enter(){System.out.println("Pesiona cualquier tecla para seguir...");read.nextLine();}
+    public static void IngresarDatos(){ //Larguisimo pero quedo bueno creo¿?
+       String madre="",procesador="",ram="",video="";
+        System.out.println("Ingrese los componentes de la PC: " +
+                "\nPlaca Madre: (Ingresando...)\nProcesador: \nMemoria RAM: \nPlaca de video:");
+        madre=Verificacion(madre);
+        System.out.print("\033[H\033[2J");
+        Espacio();
+        System.out.flush();
+
+        System.out.println("Ingrese los componentes de la PC: " +
+                "\nPlaca Madre: "+madre+"\nProcesador: (Ingresando...) \nMemoria RAM: \nPlaca de video:");
+        procesador=Verificacion(procesador);
+        System.out.print("\033[H\033[2J");
+        Espacio();
+        System.out.flush();
+
+        System.out.println("Ingrese los componentes de la PC: " +
+                "\nPlaca Madre: "+madre+ "\nProcesador:"+procesador+" \nMemoria RAM: (Ingresando...) \nPlaca de video:");
+        ram=Verificacion(ram);
+        System.out.print("\033[H\033[2J");
+        Espacio();
+        System.out.flush();
+
+        System.out.println("Ingrese los componentes de la PC: " +
+                "\nPlaca Madre: "+madre+ "\nProcesador:"+procesador+" \nMemoria RAM:"+ram+"\nPlaca de video: (Ingresando...)");
+        video=Verificacion(video);
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+        compu = new Computadora(madre,procesador,ram,video);
+    }
+}
