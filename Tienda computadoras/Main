@@ -1,0 +1,297 @@
+import java.io.File;
+import java.util.*;
+
+public class Main
+{
+    static Computadora pc;
+    static String opcionMenu="";
+    static Scanner consola = new Scanner(System.in);
+    static ArrayList<Programas> ListaProgramas = new ArrayList<>();
+    static ArrayList<Computadora> ListaComputadoras = new ArrayList<>();
+    public static void main(String[]args)
+    {
+        LeerComputadoras();
+        LeerProgramas();
+        Menu();
+    }
+    public static void ProgramasPC(){
+        System.out.println("Programas que funcionan");
+        for (int i=0;i<ListaProgramas.size();i++){
+            Programas pro = ListaProgramas.get(i);
+            if (Float.parseFloat(pc.getHilos()) >= Float.parseFloat(pro.getHilos()) &&
+                Float.parseFloat(pc.getFrecuencia()) >= Float.parseFloat(pro.getFrecuencia()) &&
+                Float.parseFloat(pc.getRam())>= Float.parseFloat(pro.getFrecuencia()) &&
+                Float.parseFloat(pc.getVram())>=Float.parseFloat(pro.getVram()) &&
+                Float.parseFloat(pc.getAlmacenamiento()) >=Float.parseFloat(pro.getAlmacenamiento()))
+            {
+                System.out.println(pro.getPrograma());
+            }
+        }
+    }
+    public static void PCideal(){
+        for (int i=0;i<ListaProgramas.size();i++){//Listar programas
+            Programas programa = ListaProgramas.get(i);
+            if (i>8){
+                System.out.println((i + 1)+")"+programa.getPrograma()
+                );
+            }else {
+                System.out.println("0"+(i + 1)+")"+programa.getPrograma()
+                );
+            }
+        }
+        boolean verificacion=false;
+        System.out.println("Seleccione el numero por separado de todos los programas que quiere que la pc soporte por separado" +
+                "\n(Si selecciona 3 programas, se calculara el consumo del mayor de los programas)" +
+                "" +
+                "\nAdemas, cuando haya terminado de seleccionar todos los programas, ingrese '-1' para indicarlo");
+        ArrayList<Programas>lista = new ArrayList<Programas>();
+        do {
+            try {
+                int opcion = Integer.parseInt(consola.nextLine());
+                if (opcion==-1){break;}
+                if(opcion>0 && opcion<ListaProgramas.size()+1)
+                {
+                    lista.add(ListaProgramas.get(opcion-1));
+                }
+                else {System.out.println("Dato no valido, vuelva a ingresarlo");}
+            }catch (Exception e){System.out.println("Error ingresando el programa, vuelva a ingresar el numero:" + e);}
+        }while (!verificacion); //guardar programas seleccionados
+
+        //for (int i=0;i<lista.size();i++){System.out.println(lista.get(i).getPrograma());}
+        //comparar hilos, frecuencia, ram, vram,almacenamiento
+        float Mhilos=0,Mfrecuencia=0,Mram=0,Mvram=0,Malmacenamiento=0;//Mayor (algo)
+        try {
+            Mhilos=Float.parseFloat(lista.get(0).getHilos());
+            Mfrecuencia=Float.parseFloat(lista.get(0).getFrecuencia());
+            Mram=Float.parseFloat(lista.get(0).getRam());
+            Mvram=Float.parseFloat(lista.get(0).getVram());
+            Malmacenamiento=Float.parseFloat(lista.get(0).getAlmacenamiento());
+        }catch (Exception e){System.out.println("Error comparando consumo de programas: "+e);}
+        for (int j=0;j<lista.size();j++)
+        {
+            if (Mhilos<Float.parseFloat(lista.get(j).getHilos())){Mhilos=Float.parseFloat(lista.get(j).getHilos());}
+            if (Mfrecuencia<Float.parseFloat(lista.get(j).getFrecuencia())){Mfrecuencia=Float.parseFloat(lista.get(j).getFrecuencia());}
+            if (Mram<Float.parseFloat(lista.get(j).getRam())){Mram=Float.parseFloat(lista.get(j).getRam());}
+            if (Mvram<Float.parseFloat(lista.get(j).getVram())){Mvram=Float.parseFloat(lista.get(j).getVram());}
+            if (Malmacenamiento<Float.parseFloat(lista.get(j).getAlmacenamiento())){Malmacenamiento=Float.parseFloat(lista.get(j).getAlmacenamiento());}
+        }
+        System.out.println("Computadoras que soportar los programas:");
+        for (int k=0;k<ListaComputadoras.size();k++)
+        {
+            Computadora pc = ListaComputadoras.get(k);
+            if (Float.parseFloat(pc.getHilos())>=Mhilos &&
+                Float.parseFloat(pc.getFrecuencia())>=Mfrecuencia &&
+                Float.parseFloat(pc.getRam())>=Mram &&
+                Float.parseFloat(pc.getVram())>=Mvram &&
+                Float.parseFloat(pc.getAlmacenamiento())>=Malmacenamiento)
+            {
+                System.out.println(pc.getMarca()+" "+ pc.getModelo());
+            }
+// El molde va primero, luego los datos separados por comas. gracias gemini
+        }
+
+    }
+    public static void ElejirPC(){
+        for (int i=0;i<ListaComputadoras.size();i++){
+            Computadora pc = ListaComputadoras.get(i);
+// El molde va primero, luego los datos separados por comas. gracias gemini
+            if (i>8){
+                System.out.printf("%d) %-15s | %-25s | $%-10s %n",
+                        (i + 1),
+                        pc.getMarca(),
+                        pc.getModelo(),
+                        pc.getPrecio()
+                );
+            }else {
+                System.out.printf("%s) %-15s | %-25s | $%-10s %n",
+                        "0"+(i + 1),
+                        pc.getMarca(),
+                        pc.getModelo(),
+                        pc.getPrecio()
+                );
+            }
+        }
+        boolean verificacion =false;
+        System.out.println("Seleccione el numero de la computadora que quiere comprar:");
+        do {
+            try {
+                int opcion = Integer.parseInt(consola.nextLine());
+                if(opcion>0 && opcion<ListaComputadoras.size()+1)
+                {verificacion=true;
+                pc=ListaComputadoras.get(opcion-1);
+                }
+                else {System.out.println("Dato no valido, vuelva a ingresarlo");}
+            }catch (Exception e){System.out.println("Error ingresando la PC, vuelva a ingresar el numero:" + e);}
+        }while (!verificacion);
+        System.out.println("\u001B[93m"+"Se eligio la PC: "+pc.getMarca()+" "+pc.getModelo()+"\u001B[0m");
+    }
+    public static void ComputadoraC(){
+        Computadora pccara=ListaComputadoras.get(0);
+        Computadora pc = ListaComputadoras.get(0);
+        int cara =Integer.parseInt(pc.getPrecio());
+        for (int i=0;i<ListaComputadoras.size();i++)
+        {
+            pc = ListaComputadoras.get(i);
+            try {
+                int precio = Integer.parseInt(pc.getPrecio());
+                if (precio>cara)
+                {
+                    cara=precio;
+                    pccara= ListaComputadoras.get(i);
+                }
+
+            }catch (Exception e){System.out.println("Error "+e);}
+        }
+        System.out.println("\u001B[93m"+"La computadora mas costosa es la: "+pccara.getMarca()+" "+pccara.getModelo()+" con un precio de: $"+pccara.getPrecio()+"\u001B[0m");
+
+    }
+    public static void ComputadoraE(){ //posiblemente podia reutilizar ComputadoraC pero ya me queme el cerebro arreglando el serializador
+        Computadora pcbarata=ListaComputadoras.get(0);
+        Computadora pc = ListaComputadoras.get(0);
+        int barato =Integer.parseInt(pc.getPrecio());
+        for (int i=0;i<ListaComputadoras.size();i++)
+        {
+            pc = ListaComputadoras.get(i);
+            try {
+                 int precio = Integer.parseInt(pc.getPrecio());
+                 if (precio<barato)
+                 {
+                     barato=precio;
+                     pcbarata = ListaComputadoras.get(i);
+                 }
+
+            }catch (Exception e){System.out.println("Error "+e);}
+        }
+        System.out.println("\u001B[93m"+"La computadora mas economica es la: "+pcbarata.getMarca()+" "+pcbarata.getModelo()+" con un precio de: $"+pcbarata.getPrecio()+"\u001B[0m");
+    }
+    public static void Menu() {
+        do {
+            System.out.println("/----------TIENDA DE COMPUTADORAS----------\\"
+                    +"\n1)Computadora mas economica"
+                    +"\n2)Computadora mas cara"
+                    +"\n3)Elegir Computadora"
+                    +"\n4)Computadora segun las necesidades del cliente"
+                    +"\n5)Mostrar programas que pueden correr en la computadora seleccionada"
+                    +"\n6)Salir");
+            opcionMenu = consola.next();
+            switch (opcionMenu)
+            {
+                case "1":ComputadoraE();break;
+                case "2":ComputadoraC();break;
+                case "3":ElejirPC();break;
+                case "4":PCideal();break;
+                case "5":ProgramasPC();break;
+                case "6":System.out.println("Saliendooo");break;
+                default:System.out.println("Opcion '"+opcionMenu+"' no valida");break;
+            }
+        }while (!opcionMenu.equals("6"));
+
+    }
+
+    public static void LeerComputadoras() {
+        String ruta = "src/Computadoras.txt";
+        File archivo = new File(ruta);
+        // Cambia el ArrayList para que guarde objetos Computadora en lugar de Strings
+
+        try {
+            if (archivo.exists()) {
+                Scanner Lector = new Scanner(archivo);
+                String[] datosTemporales = new String[12];
+                int contadorDatos = 0;
+
+                while (Lector.hasNextLine()) {
+                    String linea = Lector.nextLine();
+                    String variableActual = "";
+                    boolean dentroDeComillas = false;
+
+                    for (int i = 0; i < linea.length(); i++) {
+                        char c = linea.charAt(i);
+
+                        if (c == '"') {
+                            dentroDeComillas = !dentroDeComillas;
+                            if (!dentroDeComillas) {
+                                // Guardamos el dato en la posición correspondiente (0 a 11)
+                                datosTemporales[contadorDatos] = variableActual;
+                                contadorDatos++;
+                                variableActual = "";
+
+                                // Si ya completamos los 12 datos
+                                if (contadorDatos == 12) {
+                                    // Creamos la instancia pasándole los 12 Strings
+                                    Computadora nuevaPC = new Computadora(
+                                            datosTemporales[0], datosTemporales[1], datosTemporales[2],
+                                            datosTemporales[3], datosTemporales[4], datosTemporales[5],
+                                            datosTemporales[6], datosTemporales[7], datosTemporales[8],
+                                            datosTemporales[9], datosTemporales[10], datosTemporales[11]
+                                    );
+                                    ListaComputadoras.add(nuevaPC);
+
+                                    // Reiniciamos el contador para la siguiente PC
+                                    contadorDatos = 0;
+                                }
+                            }
+                        } else if (dentroDeComillas) {
+                            variableActual += c;
+                        }
+                    }
+                }
+                Lector.close();
+                System.out.println("Se cargaron " + ListaComputadoras.size() + " computadoras.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    public static void LeerProgramas(){
+        String ruta = "src/Programas.txt";
+        File archivo = new File(ruta);
+        // Cambia el ArrayList para que guarde objetos Computadora en lugar de Strings
+
+        try {
+            if (archivo.exists()) {
+                Scanner Lector = new Scanner(archivo);
+                String[] datosTemporales = new String[6];
+                int contadorDatos = 0;
+
+                while (Lector.hasNextLine()) {
+                    String linea = Lector.nextLine();
+                    String variableActual = "";
+                    boolean dentroDeComillas = false;
+
+                    for (int i = 0; i < linea.length(); i++) {
+                        char c = linea.charAt(i);
+
+                        if (c == '"') {
+                            dentroDeComillas = !dentroDeComillas;
+                            if (!dentroDeComillas) {
+                                // Guardamos el dato en la posición correspondiente (0 a 11)
+                                datosTemporales[contadorDatos] = variableActual;
+                                contadorDatos++;
+                                variableActual = "";
+
+                                // Si ya completamos los 12 datos
+                                if (contadorDatos == 6) {
+                                    // Creamos la instancia pasándole los 12 Strings
+                                    Programas nuevoP = new Programas(
+                                            datosTemporales[0], datosTemporales[1], datosTemporales[2],
+                                            datosTemporales[3], datosTemporales[4], datosTemporales[5]
+                                    );
+                                    ListaProgramas.add(nuevoP);
+
+                                    // Reiniciamos el contador para la siguiente PC
+                                    contadorDatos = 0;
+                                }
+                            }
+                        } else if (dentroDeComillas) {
+                            variableActual += c;
+                        }
+                    }
+                }
+                Lector.close();
+                System.out.println("Se cargaron " + ListaProgramas.size() + " Programas.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
