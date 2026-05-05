@@ -3,11 +3,12 @@ import java.util.*;
 
 public class Main
 {
-    static Computadora pc;
+    static Computadora pc = new Computadora("null", "null", "null", "null", "null", "null", "null", "null", "null", "null", "null", "null");
     static String opcionMenu="";
     static Scanner consola = new Scanner(System.in);
     static ArrayList<Programas> ListaProgramas = new ArrayList<>();
     static ArrayList<Computadora> ListaComputadoras = new ArrayList<>();
+
     public static void main(String[]args)
     {
         LeerComputadoras();
@@ -40,10 +41,10 @@ public class Main
             }
         }
         boolean verificacion=false;
-        System.out.println("Seleccione el numero por separado de todos los programas que quiere que la pc soporte por separado" +
+        System.out.println("\u001B[32m"+"Seleccione el \u001B[92m NUMERO \u001B[32m por separado de todos los programas que quiere que la pc soporte por separado" +
                 "\n(Si selecciona 3 programas, se calculara el consumo del mayor de los programas)" +
-                "" +
-                "\nAdemas, cuando haya terminado de seleccionar todos los programas, ingrese '-1' para indicarlo");
+                "\n" +
+                "\nAdemas, cuando haya terminado de seleccionar todos los programas, ingrese '-1' para indicarlo"+"\u001B[0m");
         ArrayList<Programas>lista = new ArrayList<Programas>();
         do {
             try {
@@ -75,7 +76,7 @@ public class Main
             if (Mvram<Float.parseFloat(lista.get(j).getVram())){Mvram=Float.parseFloat(lista.get(j).getVram());}
             if (Malmacenamiento<Float.parseFloat(lista.get(j).getAlmacenamiento())){Malmacenamiento=Float.parseFloat(lista.get(j).getAlmacenamiento());}
         }
-        System.out.println("Computadoras que soportar los programas:");
+        System.out.println("\u001B[32m"+"Computadoras que soportar los programas:"+"\u001B[0m");
         for (int k=0;k<ListaComputadoras.size();k++)
         {
             Computadora pc = ListaComputadoras.get(k);
@@ -112,7 +113,7 @@ public class Main
             }
         }
         boolean verificacion =false;
-        System.out.println("Seleccione el numero de la computadora que quiere comprar:");
+        System.out.println("\u001B[92m"+"Seleccione el numero de la computadora que quiere comprar:"+"\u001B[0m");
         do {
             try {
                 int opcion = Integer.parseInt(consola.nextLine());
@@ -166,13 +167,17 @@ public class Main
     }
     public static void Menu() {
         do {
-            System.out.println("/----------TIENDA DE COMPUTADORAS----------\\"
-                    +"\n1)Computadora mas economica"
-                    +"\n2)Computadora mas cara"
-                    +"\n3)Elegir Computadora"
-                    +"\n4)Computadora segun las necesidades del cliente"
-                    +"\n5)Mostrar programas que pueden correr en la computadora seleccionada"
-                    +"\n6)Salir");
+            System.out.println("\u001B[91m"+"\\___---TTT---___/TIENDA DE COMPUTADORAS\\___---TTT---___/"+"\u001B[0m"+"\u001B[31m");
+                    System.out.printf("%-60s | %-55s | %-55s | %-55s | %-55s | %-55s | %-55s %n",
+                    "\u001B[31m"+
+                    "\n1)Computadora mas economica",
+                    "\n2)Computadora mas cara",
+                    "\n3)Elegir Computadora",
+                    "\n4)Computadora segun las necesidades del cliente",
+                    "\n5)Mostrar programas que pueden correr",
+                    "\nen la computadora seleccionada",
+                    "\n6)Salir"
+                    +"\u001B[0m");
             opcionMenu = consola.next();
             switch (opcionMenu)
             {
@@ -180,8 +185,18 @@ public class Main
                 case "2":ComputadoraC();break;
                 case "3":ElejirPC();break;
                 case "4":PCideal();break;
-                case "5":ProgramasPC();break;
-                case "6":System.out.println("Saliendooo");break;
+                case "5":
+                    if(!pc.getHilos().equals("null")){ProgramasPC();}
+                    else {System.out.println("No hay ninguna computadora seleccionada");};
+                    break;
+                case "6":
+                    System.out.println("███████  █████  ██      ██ ███████ ███    ██ ██████   ██████   ██████   ██████  ");
+                    System.out.println("██      ██   ██ ██      ██ ██      ████   ██ ██   ██ ██    ██ ██    ██ ██    ██ ");
+                    System.out.println("███████ ███████ ██      ██ █████   ██ ██  ██ ██   ██ ██    ██ ██    ██ ██    ██ ");
+                    System.out.println("     ██ ██   ██ ██      ██ ██      ██  ██ ██ ██   ██ ██    ██ ██    ██ ██    ██ ");
+                    System.out.println("███████ ██   ██ ███████ ██ ███████ ██   ████ ██████   ██████   ██████   ██████  ");
+
+                    ;break;
                 default:System.out.println("Opcion '"+opcionMenu+"' no valida");break;
             }
         }while (!opcionMenu.equals("6"));
@@ -295,3 +310,4 @@ public class Main
         }
     }
 }
+
